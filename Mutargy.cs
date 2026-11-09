@@ -21,6 +21,10 @@ namespace MuzeumApp
             }
         }
         private static int osszesMutargySzama;
+        public static int OsszesMutargySzama
+        {
+            get { return osszesMutargySzama; }
+        }
         public Mutargy(string a, int b)
         {
             Azonosito = a;

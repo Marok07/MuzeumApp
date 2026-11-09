@@ -44,3 +44,14 @@ foreach(var mut in mutargyak)
         Console.WriteLine(fes);
     }
 }
+
+var descendingList = mutargyak.OrderByDescending(m => m.BecsultErtek);
+List<string> rawData = new List<string>() { "Azonosito;BecsultErtek;BiztositasiDij" };
+foreach(var e in descendingList)
+{
+    rawData.Add($"{e.Azonosito};{e.BecsultErtek};{e.BiztositasDij()}");
+}
+File.WriteAllLines("riport.txt",rawData);
+Console.WriteLine("\nA riport.txt fájl sikeresen elkészült a kimeneti mappában.");
+
+Console.WriteLine($"\nMűtárgy példányok száma (static): {Mutargy.OsszesMutargySzama} db");
