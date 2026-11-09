@@ -33,8 +33,8 @@ Console.WriteLine("\nLINQ Statisztikák:");
 Console.WriteLine($"Műtárgyak átlagos értéke: {mutargyak.Average(m => m.BecsultErtek)} Ft");
 var legDragabb = mutargyak.MaxBy(m => m.BecsultErtek);
 Console.WriteLine($"Legértékesebb műtártgy: {legDragabb.Azonosito} ({legDragabb.BecsultErtek} Ft)");
-var milliosok = mutargyak.Select(m => m).Where(m => m.BecsultErtek > 1000000);
-Console.WriteLine($"Milliós értéket meghaladó műtárgyak: {milliosok.Count()} db");
+var milliosok = mutargyak.Count(x => x.BecsultErtek >= 1000000); //mutargyak.Select(m => m).Where(m => m.BecsultErtek > 1000000);
+Console.WriteLine($"Milliós értéket meghaladó műtárgyak: {milliosok} db");
 
 Console.WriteLine("\nFestmények külön elemzése");
 foreach(var mut in mutargyak)
@@ -44,13 +44,14 @@ foreach(var mut in mutargyak)
         Console.WriteLine($"{fes.Azonosito} festmény kora: {fes.KorEvekben} év");
     }
 }
-
+/*
 var descendingList = mutargyak.OrderByDescending(m => m.BecsultErtek);
 List<string> rawData = new List<string>() { "Azonosito;BecsultErtek;BiztositasiDij" };
 foreach(var e in descendingList)
 {
     rawData.Add($"{e.Azonosito};{e.BecsultErtek};{e.BiztositasDij()}");
-}
+}*/
+IEnumerable<string> rawData = mutargyak.OrderByDescending(m => m.BecsultErtek).Select(m=>$"{m.Azonosito};{m.BecsultErtek};{m.BiztositasDij()}");
 File.WriteAllLines("riport.txt",rawData);
 Console.WriteLine("\nA riport.txt fájl sikeresen elkészült a kimeneti mappában.");
 
