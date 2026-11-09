@@ -41,7 +41,7 @@ foreach(var mut in mutargyak)
 {
     if(mut is Festmeny fes)
     {
-        Console.WriteLine(fes);
+        Console.WriteLine($"{fes.Azonosito} festmény kora: {fes.KorEvekben} év");
     }
 }
 
