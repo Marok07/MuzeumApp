@@ -17,7 +17,7 @@ namespace MuzeumApp
                 {
                     becsultErtek = 50000;
                 }
-                becsultErtek = value;
+                else becsultErtek = value;
             }
         }
         private static int osszesMutargySzama;

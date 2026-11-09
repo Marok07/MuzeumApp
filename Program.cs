@@ -23,11 +23,24 @@ foreach(var line in file)
 }
 
 Console.WriteLine($"Sikeresen beolvasott műtárgyak száma: {mutargyak.Count} db\nKiszűrtz hibás sorok száma: {hibasSorokSzama} db");
-Console.WriteLine("Beolvasott műtárgyak listája:");
+Console.WriteLine("\nBeolvasott műtárgyak listája:");
 foreach(var mutargy in mutargyak)
 {
     Console.WriteLine(mutargy);
 }
 
-Console.WriteLine("LINQ Statisztikák:");
+Console.WriteLine("\nLINQ Statisztikák:");
+Console.WriteLine($"Műtárgyak átlagos értéke: {mutargyak.Average(m => m.BecsultErtek)} Ft");
+var legDragabb = mutargyak.MaxBy(m => m.BecsultErtek);
+Console.WriteLine($"Legértékesebb műtártgy: {legDragabb.Azonosito} ({legDragabb.BecsultErtek} Ft)");
+var milliosok = mutargyak.Select(m => m).Where(m => m.BecsultErtek > 1000000);
+Console.WriteLine($"Milliós értéket meghaladó műtárgyak: {milliosok.Count()} db");
 
+Console.WriteLine("\nFestmények külön elemzése");
+foreach(var mut in mutargyak)
+{
+    if(mut is Festmeny fes)
+    {
+        Console.WriteLine(fes);
+    }
+}
